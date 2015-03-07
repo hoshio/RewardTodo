@@ -1,0 +1,21 @@
+@(msg:String, form1: Form[models.Todos])
+
+@main("add page"){
+
+	<H1>update</H1>
+	<p>@msg</p>
+	@helper.form(action = routes.Application.update){
+		<input type="hidden" value="@form1("id").value" name="id" />
+		@(helper.inputText(
+			field = form1("todo_name")
+		))
+		@(helper.inputText(
+			field = form1("todo_detail")
+		))
+		@(helper.inputText(
+			field = form1("author")
+		))
+		
+		<input type="submit">
+	}
+}

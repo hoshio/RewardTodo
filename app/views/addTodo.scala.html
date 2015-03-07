@@ -1,0 +1,20 @@
+@(msg:String, form1: Form[models.Todos])
+
+@main("add page"){
+
+	<H2>Add Todo</H2>
+	<p>@msg</p>
+	@helper.form(action = routes.Application.createTodo){
+		@(helper.inputText(
+			field = form1("todo_name")
+		))
+		@(helper.inputText(
+			field = form1("todo_detail")
+		))
+		@(helper.inputText(
+			field = form1("username")
+		))
+		
+		<input type="submit">
+	}
+}

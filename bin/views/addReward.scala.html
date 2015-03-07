@@ -1,0 +1,20 @@
+@(msg:String, form1: Form[models.Rewards])
+
+@main("add page"){
+
+	<H2>Add Reward</H2>
+	<p>@msg</p>
+	@helper.form(action = routes.Application.createReward){
+		@(helper.inputText(
+			field = form1("reward_name")
+		))
+		@(helper.inputText(
+			field = form1("reward_detail")
+		))
+		@(helper.inputText(
+			field = form1("username")
+		))
+		
+		<input type="submit">
+	}
+}

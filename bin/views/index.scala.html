@@ -1,0 +1,42 @@
+@(msg: String, form1: Form[Application.SampleForm], dataTodos: List[Todos], dataRewards: List[Rewards])
+
+@main("RewardTodo") {
+
+	<script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
+	<H2>TOP</H2>
+	<p>@msg</p>
+	<H2>Daily</H2>
+	<H2>Todo</H2>
+	<div>
+		<table>
+		<tr>
+			<th>name</th>
+			<th>button</th>
+		</tr>
+		@for(data <- dataTodos) {
+			<tr>
+				<td>@data.todo_name</td>
+				<td><button>clear</button></td>
+			</tr>
+		}
+		</table>
+	</div>
+	@helper.form(action = routes.Application.addTodo){
+		<input type="submit">
+	}
+	<H2>Reward</H2>
+	@for(data <- dataRewards) {
+		<p>@data.reward_name</p>
+	}
+	@helper.form(action = routes.Application.addReward){
+		<input type="submit">
+	}
+	<H2>Reward TimeLine</H2>
+<!--
+ 	<p>
+		<input type="text" id="input">
+		<button id="sendbtn">todo</button>
+	</p>
+	<ul id="output"></ul>
+ -->
+}
