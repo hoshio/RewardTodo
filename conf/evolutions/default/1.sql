@@ -28,9 +28,11 @@ create table todos (
 
 create table users (
   id                        bigint not null,
-  username                  varchar(255),
-  sum_point                 varchar(255),
-  postdate                  timestamp not null,
+  twitter_id                bigint,
+  user_name                 varchar(255),
+  profile_img_url           varchar(255),
+  access_token              varchar(255),
+  access_token_secret       varchar(255),
   constraint pk_users primary key (id))
 ;
 

@@ -3,8 +3,8 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-#POST	/							controllers.Application.send()
+
+GET		/							controllers.Application.index()
 GET		/addTodo					controllers.Application.addTodo()
 GET		/addReward					controllers.Application.addReward()
 GET		/createTodo					controllers.Application.createTodo()
@@ -13,6 +13,8 @@ GET		/setid						controllers.Application.set()
 POST	/edit						controllers.Application.edit()
 POST	/update						controllers.Application.update()
 POST	/ajax						controllers.Application.ajax()
+GET		/login						controllers.TwitterService.login()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
