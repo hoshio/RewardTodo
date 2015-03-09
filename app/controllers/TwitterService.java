@@ -56,7 +56,7 @@ public class TwitterService extends Controller {
 		}
 	}
 	
-	public static void callback() {
+	public static Result callback() {
 		
 		RequestToken sessionRequestToken = Secured.getSession();
 		String token = sessionRequestToken.getToken();
@@ -76,7 +76,7 @@ public class TwitterService extends Controller {
 				e.printStackTrace();
 			}
 		}
-		redirect("/");
+		return redirect("/");
 	}
 
 	public static Result index() {
