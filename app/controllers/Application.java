@@ -29,7 +29,7 @@ public class Application extends Controller {
 		public String message;
 	}
 	
-	//@Security.Authenticated(Secured.class)
+	@Security.Authenticated(Secured.class)
 	public static Result index() throws TwitterException {
 		List<Todos> datas = Todos.find.orderBy("postdate desc").findList();
 		List<Rewards> dataReward = Rewards.find.orderBy("postdate desc").findList();
