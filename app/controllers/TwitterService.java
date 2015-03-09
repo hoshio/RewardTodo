@@ -28,8 +28,9 @@ public class TwitterService extends Controller {
 	
 	final static String TWITTER_CONSUMER_KEY = Play.application().configuration().getString("twitter.consumer.key");
 	final static String TWITTER_CONSUMER_SECRET = Play.application().configuration().getString("twitter.consumer.secret");
-    
-	public static class SampleForm {
+    final static String callbackURL = "http://localhost:9000/callback";
+
+    public static class SampleForm {
 		public String message;
 	}
 	
@@ -55,11 +56,12 @@ public class TwitterService extends Controller {
 		}
 	}
 	
-	public static void callback(String oauth_verifier) {
+	public static void callback() {
 		
 		RequestToken sessionRequestToken = Secured.getSession();
 		String token = sessionRequestToken.getToken();
 		String tokenSecret = sessionRequestToken.getTokenSecret();
+		String oauth_verifier = request().getQueryString("oauth_verifier");
 		if (token != null && tokenSecret != null) {
 			try {
 				RequestToken requestToken = new RequestToken(token, tokenSecret);
