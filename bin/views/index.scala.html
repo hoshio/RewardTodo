@@ -1,4 +1,4 @@
-@(msg: String, form1: Form[Application.SampleForm], dataTodos: List[Todos], dataRewards: List[Rewards])
+@(msg: String)
 
 @main("RewardTodo") {
 
@@ -13,21 +13,12 @@
 			<th>name</th>
 			<th>button</th>
 		</tr>
-		@for(data <- dataTodos) {
-			<tr>
-				<td>@data.todo_name</td>
-				<td><button>clear</button></td>
-			</tr>
-		}
 		</table>
 	</div>
 	@helper.form(action = routes.Application.addTodo){
 		<input type="submit">
 	}
 	<H2>Reward</H2>
-	@for(data <- dataRewards) {
-		<p>@data.reward_name</p>
-	}
 	@helper.form(action = routes.Application.addReward){
 		<input type="submit">
 	}

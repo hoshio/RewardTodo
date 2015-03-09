@@ -17,6 +17,7 @@ import views.html.addTodo;
 import views.html.edit;
 import views.html.index;
 import views.html.setid;
+import play.mvc.Security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,12 +29,11 @@ public class Application extends Controller {
 		public String message;
 	}
 	
-//	public static Result index() {
+	@Security.Authenticated(Secured.class)
 	public static Result index() throws TwitterException {
 		List<Todos> datas = Todos.find.orderBy("postdate desc").findList();
 		List<Rewards> dataReward = Rewards.find.orderBy("postdate desc").findList();
-		TwitterService tweet = new TwitterService();
-		return ok(index.render(tweet.index(), new Form(SampleForm.class), datas, dataReward));
+		return ok(index.render("aaaaa"));
 //		return ok(index.render("sample", new Form(SampleForm.class), datas, dataReward));
 	}
 	
@@ -53,18 +53,6 @@ public class Application extends Controller {
 		return ok(json);
 	}
 
-		
-//	public static Result send(){
-//		Form<SampleForm> f = form(SampleForm.class).bindFromRequest();
-//		List<Todos> datas = Todos.find.all();
-//		if(!f.hasErrors()){
-//			SampleForm data = f.get();
-//			String msg = "you typed: " + data.message;
-//			return ok(index.render(msg, f, datas));
-//		}else{
-//			return badRequest(index.render("ERROR", form(SampleForm.class), datas));
-//		}
-//	}
 	
 	public static Result addTodo(){
 		Form<Todos> f = new Form(Todos.class);
@@ -132,49 +120,4 @@ public class Application extends Controller {
 		}
 	}
 	
-	public String twitter_info() throws TwitterException {
-//	    final String TWITTER_CONSUMER_KEY    = "取得したコードを入力";
-//	    final String TWITTER_CONSUMER_SECRET = "取得したコードを入力";
-//	    final String TWITTER_ACCESS_TOKEN        = "取得したコードを入力";
-//	    final String TWITTER_ACCESS_TOKEN_SECRET = "取得したコードを入力";
-
-	    final String TWITTER_CONSUMER_KEY    = "s9CYuFNQKENgm7NPV2qNGgfRF";
-	    final String TWITTER_CONSUMER_SECRET = "vR0IfAa1vuXKq38tOtH2RDeFWinqN9osLENhrdtSfIAXkrAwhD";
-	    final String TWITTER_ACCESS_TOKEN        = "168507212-U1lBhfiX4qTplJ0adaCJ88ilvrAjVwLXhcDBDewh";
-	    final String TWITTER_ACCESS_TOKEN_SECRET = "XfSwNC0ccVogIMeSvm73OethMoIp8wugrNwKc0OeDRBRP";
-
-	    
-	    // アクセストークンの設定
-	    AccessToken token = new AccessToken(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET);
-	     
-	    Twitter twitter = new TwitterFactory().getInstance();
-	    twitter.setOAuthConsumer(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
-	    twitter.setOAuthAccessToken(token);
-	    User user = twitter.verifyCredentials();
-
-	    // 表示してみる。
-	    //ユーザ情報取得
-	    System.out.println("名前　　　　：" + user.getName());
-	    System.out.println("表示名　　　：" + user.getScreenName());
-	    System.err.println("フォロー数　：" + user.getFriendsCount());
-	    System.out.println("フォロワー数：" + user.getFollowersCount());
-//		//つぶやきの実行
-//		Status status = twitter.updateStatus("test for twitter4J");
-//	    ResponseList<Status> list_status = twitter.getHomeTimeline();
-//	    System.out.println("自分の名前：" + user.getScreenName());
-//	    System.out.println("概要　　　：" + user.getDescription());
-//	    for (Status status : list_status) {
-//	        System.out.println("ツイート：" + status.getText());
-//	    }
-	    String str = "名前：" + user.getName()
-	    		+ "表示名：" + user.getScreenName()
-	    		+ "フォロー数：" + user.getFriendsCount()
-	    		+ "フォロワー数：" + user.getFollowersCount();
-//	    List<Todos> datas = Todos.find.orderBy("postdate desc").findList();
-//	    List<Rewards> dataReward = Rewards.find.orderBy("postdate desc").findList();
-//		return ok(index.render(str, new Form(SampleForm.class), datas, dataReward));
-	    return str;
-	}
-
-
 }

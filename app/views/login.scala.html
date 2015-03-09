@@ -1,9 +1,9 @@
-@(msg: String, form1: Form[Application.SampleForm])
+@(msg: String)
 
 @main("RewardTodo") {
 
 	<H2>LOGIN</H2>
-	<a href="@{routes.TwitterService.login}">twitter</a>
+	<a href="@{routes.TwitterService.oauth}">twitter</a>
 	<p>@msg</p>
 
 }

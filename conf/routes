@@ -14,6 +14,7 @@ POST	/edit						controllers.Application.edit()
 POST	/update						controllers.Application.update()
 POST	/ajax						controllers.Application.ajax()
 GET		/login						controllers.TwitterService.login()
+GET		/twitter_oauth				controllers.TwitterService.oauth()
 
 
 # Map static resources from the /public folder to the /assets URL path
