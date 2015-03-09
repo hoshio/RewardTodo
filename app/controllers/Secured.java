@@ -23,7 +23,7 @@ public class Secured extends Security.Authenticator{
 	 * @see play.mvc.Security.Authenticator#getUsername(play.mvc.Http.Context)
 	 */
 	public RequestToken getSession(Context ctx){
-		RequestToken session = (RequestToken)Cache.get("login.key");
+		RequestToken session = (RequestToken)Cache.get("berorelogin.key");
 		if (session == null){
 			return null;    // ログインセッションなし
 		}

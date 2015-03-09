@@ -62,6 +62,7 @@ public class TwitterService extends Controller {
 		String token = sessionRequestToken.getToken();
 		String tokenSecret = sessionRequestToken.getTokenSecret();
 		String oauth_verifier = request().getQueryString("oauth_verifier");
+		System.out.println("token:" + token + ", tokenSecret:" + tokenSecret + ", oauth_verifier:" + oauth_verifier );
 		if (token != null && tokenSecret != null) {
 			try {
 				RequestToken requestToken = new RequestToken(token, tokenSecret);
