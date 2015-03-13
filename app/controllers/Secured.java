@@ -41,7 +41,8 @@ public class Secured extends Security.Authenticator{
 	public static void updateSession(String key, ComSession session)
     {
         // アプリケーションキャッシュの有効期限を更新
-        Cache.set(key, session, Constants.SEIION_TIME);
+        //Cache.set(key, session, Constants.SEIION_TIME);
+        Cache.set(key, session);
     }
 
     /**
