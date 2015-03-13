@@ -40,9 +40,9 @@ public class TwitterService extends Controller {
 		RequestToken requestToken;
 		try {
 			//local用
-			requestToken = twitter.getOAuthRequestToken(callbackURL);
+			//requestToken = twitter.getOAuthRequestToken(callbackURL);
 			//本番用
-			//requestToken = twitter.getOAuthRequestToken();
+			requestToken = twitter.getOAuthRequestToken();
 			
 			//Session生成
 			session.setTwitter(twitter);
