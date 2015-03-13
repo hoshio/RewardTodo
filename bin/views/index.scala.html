@@ -1,28 +1,25 @@
-@(msg: String)
+@(msg: String, form1: play.data.Form[models.Todos])
 
 @main("RewardTodo") {
 
 	<script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
 	<H2>TOP</H2>
-	<p>@msg</p>
 	<H2>Daily</H2>
 	<H2>Todo</H2>
-	<div>
-		<table>
-		<tr>
-			<th>name</th>
-			<th>button</th>
-		</tr>
-		</table>
-	</div>
-	@helper.form(action = routes.Application.addTodo){
+	@helper.form(action = routes.Application.createTodo){
+		@(helper.inputText(
+			field = form1("todo_name")
+		))
+		@(helper.inputText(
+			field = form1("todo_detail")
+		))
+		@(helper.inputText(
+			field = form1("username")
+		))
+		
 		<input type="submit">
 	}
-	<H2>Reward</H2>
-	@helper.form(action = routes.Application.addReward){
-		<input type="submit">
-	}
-	<H2>Reward TimeLine</H2>
+	<p>@msg</p>
 <!--
  	<p>
 		<input type="text" id="input">

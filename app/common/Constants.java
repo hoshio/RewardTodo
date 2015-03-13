@@ -6,10 +6,8 @@ package common;
  *
  */
 public class Constants {
-	public class Session {
-		public static final String key = "sessionkey";
-		public static final int duration = 3600;
-	}
 	
+	public static final String SESSION_KEY = "session.key";
+	public static final int SEIION_TIME = 60;
 	
 }

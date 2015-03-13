@@ -2,11 +2,16 @@ package controllers;
 
 import java.util.List;
 
+import common.ComSession;
+import common.Constants;
+import controllers.TwitterService;
 import models.Rewards;
 import models.Todos;
+import play.Play;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -24,17 +29,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class Application extends Controller {
-	
-	public static class SampleForm {
+		
+	public static class TweetForm {
 		public String message;
 	}
 	
-	//@Security.Authenticated(Secured.class)
+	@Security.Authenticated(Secured.class)
 	public static Result index() throws TwitterException {
-		List<Todos> datas = Todos.find.orderBy("postdate desc").findList();
-		List<Rewards> dataReward = Rewards.find.orderBy("postdate desc").findList();
-		return ok(index.render("aaaaa"));
-//		return ok(index.render("sample", new Form(SampleForm.class), datas, dataReward));
+		
+		//sessionからrequestTokenを取得
+		ComSession session = Secured.getSession(Constants.SESSION_KEY);
+		String str = TwitterService.getTimeLine(session);
+		Secured.updateSession(Constants.SESSION_KEY, session);
+		
+//	    //ユーザ情報取得
+//	    String str = "名前：" + user.getName()
+//	    		+ "表示名：" + user.getScreenName()
+//	    		+ "フォロー数：" + user.getFriendsCount()
+//	    		+ "フォロワー数：" + user.getFollowersCount();
+		
+//		return ok(index.render(str.toString()));
+		return ok(index.render(str, new Form(TweetForm.class)));
 	}
 	
 	public static Result ajax(){
@@ -53,10 +68,10 @@ public class Application extends Controller {
 		return ok(json);
 	}
 
-	
+	@Security.Authenticated(Secured.class)
 	public static Result addTodo(){
 		Form<Todos> f = new Form(Todos.class);
-		return ok(addTodo.render("NEW TODO", f));
+		return ok(addTodo.render("aaaaa", f));
 	}
 	
 	public static Result addReward(){
@@ -64,6 +79,7 @@ public class Application extends Controller {
 		return ok(addReward.render("NEW REWARD", f));
 	}
 	
+	@Security.Authenticated(Secured.class)
 	public static Result createTodo(){
 		Form<Todos> f = new Form(Todos.class).bindFromRequest();
 		if(!f.hasErrors()){
